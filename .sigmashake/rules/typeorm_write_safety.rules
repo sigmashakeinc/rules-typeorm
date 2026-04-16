@@ -6,7 +6,7 @@ rule typeorm-block-unsafe-patterns {
   priority 90
   severity error
   DENY write
-  IF path GLOB "**/*" AND content CONTAINS "UNSAFE_typeorm_PATTERN"
+  IF path GLOB "**/*" AND content CONTAINS "query("
   MESSAGE "Blocked an unsafe pattern in typeorm. Use the recommended best practices for 2025/2026."
 }
 
@@ -14,7 +14,7 @@ rule typeorm-force-updated-api {
   enabled true
   priority 80
   severity warning
-  ASK write
-  IF path GLOB "**/*" AND content CONTAINS "OLD_typeorm_API"
+  LOG write
+  IF path GLOB "**/*" AND content CONTAINS "createConnection"
   MESSAGE "You are using an outdated API for typeorm. Please upgrade to the newer API."
 }
